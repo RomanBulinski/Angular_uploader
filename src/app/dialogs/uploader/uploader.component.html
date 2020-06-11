@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Złóż : {{data.name}}</h1>
+<h1 mat-dialog-title>Złóż : {{dialogData.name}}</h1>
 
 <p>Uploader</p>
 
@@ -8,7 +8,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Nazwa</mat-label>
       <label>
-        <input [(ngModel)]="data.name" matInput placeholder="Wpisz nazwe pliku">
+        <input [(ngModel)]="dialogData.name" matInput placeholder="Wpisz nazwe pliku">
       </label>
     </mat-form-field>
   </div>
@@ -28,7 +28,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Wyszukaj</mat-label>
       <label>
-        <input [(ngModel)]="data.name" matInput placeholder="Wpisz nazwe pliku">
+        <input [formControl]="foundedDocumentNameFC" matInput placeholder="Wpisz nazwe pliku">
       </label>
     </mat-form-field>
 
@@ -38,7 +38,8 @@
         <input id="file-input"
                type="file"
                style="visibility: hidden; position: absolute;"
-               (change)="handleFileInput($event.target.files)">
+               (change)="handleFileInput($event)"
+               accept="image/jpeg">
       </label>
     </button>
 
@@ -48,5 +49,5 @@
 
 <div mat-dialog-actions>
   <button (click)="onNoClick()" mat-button>Anuluj</button>
-  <button [mat-dialog-close]="data.animal" mat-button>Ok</button>
+  <button [mat-dialog-close]="dialogData.animal" mat-button>Ok</button>
 </div>

@@ -6,10 +6,11 @@ import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
 import {UploaderComponent} from './dialogs/uploader/uploader.component';
 import {MatButtonModule, MatCardModule, MatDialogModule, MatInputModule} from '@angular/material';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavComponent} from './nav/nav.component';
 import {EmptyComponent} from './empty/empty.component';
+// import {FlexModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import {EmptyComponent} from './empty/empty.component';
     MatInputModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule,
+    // FlexModule
   ],
   providers: [],
   bootstrap: [AppComponent]
