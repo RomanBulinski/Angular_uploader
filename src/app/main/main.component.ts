@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UploaderComponent} from '../dialogs/uploader/uploader.component';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogData} from '../interfaces/DialogData';
-
-
 
 @Component({
   selector: 'app-main',
@@ -11,13 +8,7 @@ import {DialogData} from '../interfaces/DialogData';
   styleUrls: ['./main.component.scss']
 })
 
-
-
 export class MainComponent implements OnInit {
-
-  WNIOSEK: string = 'wniosek';
-  PODANIE: string = 'podanie';
-  DOCUMENT: string = 'dokument';
 
   constructor(public matDialog: MatDialog) {
   }
@@ -26,12 +17,28 @@ export class MainComponent implements OnInit {
   }
 
   getTypeAndOpenUploaderDialog(typeOfDocument: string): void {
-    let format: string;
-    if( typeOfDocument === 'wniosek' )format ='PDF';
-    if( typeOfDocument === 'podanie' )format ='JPG';
-    if( typeOfDocument === 'dokument' )format ='txt';
+    let title: string;
+    switch (typeOfDocument) {
+      case 'wniosek': {
+        title = 'wniosek';
+        break;
+      }
+      case 'dokument': {
+        title = 'dokument';
+        break;
+      }
+      case 'podanie': {
+        title = 'podanie';
+        break;
+      }
+      case 'dokument_png': {
+        title = 'dokument_png';
+        break;
+      }
+    }
+
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {name: typeOfDocument, fileFormat: format };
+    dialogConfig.data = {dialogTitle: title};
 
     const dialogRef = this.matDialog.open(UploaderComponent, dialogConfig);
 
