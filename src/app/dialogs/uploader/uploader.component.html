@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Złóż : {{data.name}}</h1>
+
+<p>Uploader</p>
+
+<div fxLayout="column" fxLayoutAlign="space-around center">
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Nazwa</mat-label>
+      <label>
+        <input [(ngModel)]="data.name" matInput placeholder="Wpisz nazwe pliku">
+      </label>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Typ</mat-label>
+      <select [(ngModel)]="typesFile[0]" matNativeControl name="typesFile">
+        <option selected value=""></option>
+        <option *ngFor="let type of typesFile" [value]="type">
+          {{type}}
+        </option>
+      </select>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="20px">
+    <mat-form-field appearance="outline">
+      <mat-label>Wyszukaj</mat-label>
+      <label>
+        <input [(ngModel)]="data.name" matInput placeholder="Wpisz nazwe pliku">
+      </label>
+    </mat-form-field>
+
+    <button mat-button>
+      <label for="file-input" class="btn btn-default" flow-btn>
+        Znajdz plik
+        <input id="file-input"
+               type="file"
+               style="visibility: hidden; position: absolute;"
+               (change)="handleFileInput($event.target.files)">
+      </label>
+    </button>
+
+  </div>
+</div>
+
+
+<div mat-dialog-actions>
+  <button (click)="onNoClick()" mat-button>Anuluj</button>
+  <button [mat-dialog-close]="data.animal" mat-button>Ok</button>
+</div>
