@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UploaderComponent} from '../dialogs/uploader/uploader.component';
 import {MatDialog, MatDialogConfig} from '@angular/material';
+import {AngularUploaderComponent} from '../dialogs/angular-uploader/angular-uploader.component';
 
 @Component({
   selector: 'app-main',
@@ -42,6 +43,14 @@ export class MainComponent implements OnInit {
 
     const dialogRef = this.matDialog.open(UploaderComponent, dialogConfig);
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+
+  openAngularUploaderDialog(){
+    const dialogRef = this.matDialog.open(AngularUploaderComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // this.animal = result;

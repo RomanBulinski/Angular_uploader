@@ -11,6 +11,30 @@ section {
   color: black;
 }
 
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+//style for angular-uploader component
+.afu-select-btn {
+  padding: 0 20px 0 20px;
+  margin: 6px 8px 6px 8px;
+  min-width: 88px;
+  border-radius: 10px;
+  font-size: 25px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration:none;
+  border: none;
+  outline: yellow;
+}
+.afu-reset-btn {}
+.afu-upload-btn {}
+.afu-dragndrop-box {}
+.afu-dragndrop-text {}
+.afu-constraints-info {}
+.afu-valid-file {}
+.afu-invalid-file {}
+.afu-progress-bar {}
+.afu-upload-status {}
+.afu-attach-pin {}

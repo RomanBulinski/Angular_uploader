@@ -10,7 +10,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavComponent} from './nav/nav.component';
 import {EmptyComponent} from './empty/empty.component';
-// import {FlexModule} from '@angular/flex-layout';
+import {AngularFileUploaderModule} from 'angular-file-uploader';
+import {AngularUploaderComponent} from './dialogs/angular-uploader/angular-uploader.component';
 
 @NgModule({
   declarations: [
@@ -18,10 +19,12 @@ import {EmptyComponent} from './empty/empty.component';
     NavComponent,
     MainComponent,
     UploaderComponent,
-    EmptyComponent
+    EmptyComponent,
+    AngularUploaderComponent
   ],
   entryComponents: [
-    UploaderComponent
+    UploaderComponent,
+    AngularUploaderComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import {EmptyComponent} from './empty/empty.component';
     BrowserAnimationsModule,
     MatCardModule,
     ReactiveFormsModule,
-    // FlexModule
+    AngularFileUploaderModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
