@@ -1,8 +1,22 @@
-<h1 mat-dialog-title>sms</h1>
+<h1 mat-dialog-title>Potwierdzenie SMS</h1>
 
+<div>
+  <mat-form-field appearance="outline">
+    <mat-label>SMS nr : 2 z dnia 01.02.2020</mat-label>
+    <label>
+      <input [formControl]="codeFC"
+             matInput
+             placeholder="Podaj kod"
+             knifeOnlyNumbers type="text">
+    </label>
+    <mat-error>
+      <span *ngIf="codeFC.hasError('required')">Kod SMS jest wymagany!</span>
+    </mat-error>
+  </mat-form-field>
+</div>
 
 
 <div mat-dialog-actions>
   <button (click)="close()" mat-button>Anuluj</button>
-  <button (click)="ok()" mat-button>Potwierdzenie SMS / Ok</button>
+  <button (click)="ok()" mat-button [disabled]="codeFC.invalid" >Ok</button>
 </div>

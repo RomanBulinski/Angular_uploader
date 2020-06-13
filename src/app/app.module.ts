@@ -27,7 +27,8 @@ import {SmsConfirmationComponent} from './dialogs/smsConfirmation/smsConfirmatio
   ],
   entryComponents: [
     UploaderComponent,
-    AngularUploaderComponent
+    AngularUploaderComponent,
+    SmsConfirmationComponent
   ],
   imports: [
     BrowserModule,

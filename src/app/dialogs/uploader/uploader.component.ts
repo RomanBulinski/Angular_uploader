@@ -5,6 +5,8 @@ import {FileData} from '../../interfaces/FileData';
 import {FileFormatsEnum} from '../../enum/fileFormatsEnum';
 import {SmsConfirmationComponent} from '../smsConfirmation/smsConfirmation.component';
 import {FileTypeEnum} from '../../enum/fileTypesEnum';
+import {AppUtils} from '../../interfaces/Utils';
+import {ProposalServiceService} from '../services/proposal-service.service';
 
 @Component({
   selector: 'app-uploader',
@@ -13,7 +15,7 @@ import {FileTypeEnum} from '../../enum/fileTypesEnum';
 })
 export class UploaderComponent implements OnInit {
 
-  EMPTY_STRING = '';
+  EMPTY_STRING = AppUtils.EMPTY_STRING;
 
   nameFC: FormControl;
   formatFileFC: FormControl;
@@ -23,12 +25,15 @@ export class UploaderComponent implements OnInit {
   formatsFile: FileFormatsEnum[];
 
   message: string;
-  readonly = true;
+  readonly: boolean;
+  isButtonFindFileDisabled: boolean;
+  isButtonOkDisabled: boolean;
 
   private fileToUpload: File;
 
   constructor(public matDialog: MatDialog,
               public dialogRef: MatDialogRef<UploaderComponent>,
+              private proposalService: ProposalServiceService,
               @Inject(MAT_DIALOG_DATA) public fileData: FileData) {
   }
 
@@ -61,13 +66,16 @@ export class UploaderComponent implements OnInit {
       this.fileData.fileFormats[2] = FileFormatsEnum.TXT;
       this.fileData.dialogTitle = FileTypeEnum.INNY;
     }
-    this. formatsFile = this.fileData.fileFormats;
+    this.formatsFile = this.fileData.fileFormats;
+    this.readonly = true;
+    this.isButtonFindFileDisabled = true;
+    this.isButtonOkDisabled = true;
   }
 
   setFormControls() {
     this.nameFC = new FormControl(this.EMPTY_STRING);
     this.formatFileFC = new FormControl(this.fileData.fileFormats[0]);
-    this.foundedDocumentFC = new FormControl(this.EMPTY_STRING, );
+    this.foundedDocumentFC = new FormControl(this.EMPTY_STRING,);
   }
 
   close(): void {
@@ -80,7 +88,9 @@ export class UploaderComponent implements OnInit {
     if (this.checkFormatFile(this.fileToUpload)) {
       this.foundedDocumentFC = new FormControl(this.fileToUpload.name);
       this.fileData.loadedFile = this.fileToUpload;
+      this.fileData.name = this.fileToUpload.name;
       this.message = 'Dokument jest gotowy do zapisu';
+      this.toggleOkButton();
     } else {
       this.message = 'Zly format plku';
     }
@@ -90,15 +100,41 @@ export class UploaderComponent implements OnInit {
     return (file.type === this.formatFileFC.value);
   }
 
-  smsCheckAndSave(): void {
-    this.smsCheck();
+  private toggleOkButton() {
+    if(this.isButtonOkDisabled){
+      this.isButtonOkDisabled = false;
+    }else{
+      this.isButtonOkDisabled = true;
+    }
   }
 
+  smsCheckAndFileSave(): void {
+    this.smsCheck();
+    this.savetoDB();
+  }
+
+  isSMScheckd = false;
+
   smsCheck(): void {
-    const dialogRef = this.matDialog.open(SmsConfirmationComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      // this.animal = result;
+    const dialogRef = this.matDialog.open(SmsConfirmationComponent, {
+      width: '350px',
+      data: true,
     });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.isSMScheckd = true;
+        this.message = 'Zapisano plik : ' + this.fileData.name;
+        this.foundedDocumentFC = new FormControl(this.EMPTY_STRING,);
+        this.toggleOkButton();
+      } else {
+        this.isSMScheckd = false;
+        this.message = 'Niezakończono operacji';
+      }
+    });
+  }
+
+  savetoDB(){
+    this.proposalService.save(this.fileData);
   }
 
 

@@ -39,7 +39,7 @@
       </label>
     </mat-form-field>
 
-    <button mat-button>
+    <button mat-button [disabled]="isButtonFindFileDisabled">
       <label for="file-input" class="btn btn-default" flow-btn>
         Znajdz plik
         <input id="file-input"
@@ -55,5 +55,7 @@
 
 <div mat-dialog-actions>
   <button (click)="close()" mat-button>Anuluj</button>
-  <button (click)="smsCheckAndSave()" mat-button>Potwierdzenie SMS / Ok</button>
+  <button (click)="smsCheckAndFileSave()"
+          mat-button [disabled]="isButtonOkDisabled">
+    Potwierdzenie SMS / Ok</button>
 </div>
