@@ -12,6 +12,8 @@ import {NavComponent} from './nav/nav.component';
 import {EmptyComponent} from './empty/empty.component';
 import {AngularFileUploaderModule} from 'angular-file-uploader';
 import {AngularUploaderComponent} from './dialogs/angular-uploader/angular-uploader.component';
+import {ProposalServiceService} from './dialogs/services/proposal-service.service';
+import {SmsConfirmationComponent} from './dialogs/smsConfirmation/smsConfirmation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import {AngularUploaderComponent} from './dialogs/angular-uploader/angular-uploa
     MainComponent,
     UploaderComponent,
     EmptyComponent,
-    AngularUploaderComponent
+    AngularUploaderComponent,
+    SmsConfirmationComponent
   ],
   entryComponents: [
     UploaderComponent,
@@ -37,9 +40,8 @@ import {AngularUploaderComponent} from './dialogs/angular-uploader/angular-uploa
     MatCardModule,
     ReactiveFormsModule,
     AngularFileUploaderModule
-
   ],
-  providers: [],
+  providers: [ProposalServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

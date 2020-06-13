@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Złóż : {{dialogData.dialogTitle}}</h1>
+<h1 mat-dialog-title>{{fileData.dialogTitle}}</h1>
 
 <div fxLayout="column" fxLayoutAlign="space-around center" >
 
@@ -30,9 +30,10 @@
 
   <div fxLayout="row" fxLayoutGap="20px">
     <mat-form-field appearance="outline">
-      <mat-label>Wyszukaj</mat-label>
+      <mat-label>Poszukiwany plik</mat-label>
       <label>
-        <input [formControl]="foundedDocumentNameFC"
+        <input [formControl]="foundedDocumentFC"
+               [readonly]="readonly"
                matInput
                placeholder="Wpisz nazwe pliku">
       </label>
@@ -45,14 +46,14 @@
                type="file"
                style="visibility: hidden; position: absolute;"
                (change)="handleFileInput($event)"
-               accept="image/jpeg">
+               accept="{{fileData.fileFormats}}">
       </label>
     </button>
-
   </div>
+  <div>{{message}}</div>
 </div>
 
 <div mat-dialog-actions>
-  <button (click)="onNoClick()" mat-button>Anuluj</button>
-  <button [mat-dialog-close]="dialogData.animal" mat-button>Ok</button>
+  <button (click)="close()" mat-button>Anuluj</button>
+  <button (click)="smsCheckAndSave()" mat-button>Potwierdzenie SMS / Ok</button>
 </div>

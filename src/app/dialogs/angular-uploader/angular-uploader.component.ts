@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {DialogData} from '../../interfaces/DialogData';
+import {FileData} from '../../interfaces/FileData';
+
 
 
 @Component({
@@ -11,12 +12,11 @@ import {DialogData} from '../../interfaces/DialogData';
 export class AngularUploaderComponent implements OnInit {
 
   resetVar: any;
-  const;
   URL_UPLOADER = 'https://example-file-upload-api';
 
   constructor(
     public dialogRef: MatDialogRef<AngularUploaderComponent>,
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogData) {
+    @Inject(MAT_DIALOG_DATA) public fileData: FileData) {
   }
 
   afuConfig = {
@@ -54,7 +54,10 @@ export class AngularUploaderComponent implements OnInit {
   };
 
   DocUpload($event: any) {
-
+    console.log('test');
+    console.log($event);
+    console.log('test-2');
+    console.log(this.resetVar);
   }
 
   ngOnInit() {
@@ -64,6 +67,5 @@ export class AngularUploaderComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 
 }

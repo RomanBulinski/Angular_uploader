@@ -1,13 +1,12 @@
 
 <div fxLayout="row" fxLayoutGap="20px">
 
-  <button (click)="getTypeAndOpenUploaderDialog('wniosek')" mat-raised-button>Złóż wniosek'</button>
-  <button (click)="getTypeAndOpenUploaderDialog('podanie')" mat-raised-button>Złóż podanie</button>
-  <button (click)="getTypeAndOpenUploaderDialog('dokument')" mat-raised-button>Złóż dokument</button>
-
-  <div> 1. One</div>
+  <button (click)="openUploaderDialog(WNIOSEK)" mat-raised-button>{{WNIOSEK}}</button>
+  <button (click)="openUploaderDialog(PODANIE)" mat-raised-button>{{PODANIE}}</button>
+  <button (click)="openUploaderDialog(DOKUMENT)" mat-raised-button>{{DOKUMENT}}</button>
+  <button (click)="openUploaderDialog(INNY)" mat-raised-button>{{INNY}}</button>
+  <div>...</div>
   <button (click)="openAngularUploaderDialog()" mat-raised-button>Angular uploader</button>
-
 
 </div>
 

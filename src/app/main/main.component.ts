@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {UploaderComponent} from '../dialogs/uploader/uploader.component';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {AngularUploaderComponent} from '../dialogs/angular-uploader/angular-uploader.component';
+import {FileTypeEnum} from '../enum/fileTypesEnum';
+
+
 
 @Component({
   selector: 'app-main',
@@ -11,42 +14,30 @@ import {AngularUploaderComponent} from '../dialogs/angular-uploader/angular-uplo
 
 export class MainComponent implements OnInit {
 
+  WNIOSEK = FileTypeEnum.WNIOSEK;
+  PODANIE = FileTypeEnum.PODANIE;
+  DOKUMENT = FileTypeEnum.DOKUMENT;
+  INNY = FileTypeEnum.INNY;
+
   constructor(public matDialog: MatDialog) {
   }
 
   ngOnInit() {
   }
 
-  getTypeAndOpenUploaderDialog(typeOfDocument: string): void {
-    let title: string;
-    switch (typeOfDocument) {
-      case 'wniosek': {
-        title = 'wniosek';
-        break;
-      }
-      case 'dokument': {
-        title = 'dokument';
-        break;
-      }
-      case 'podanie': {
-        title = 'podanie';
-        break;
-      }
-      case 'dokument_png': {
-        title = 'dokument_png';
-        break;
-      }
-    }
-
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {dialogTitle: title};
-
-    const dialogRef = this.matDialog.open(UploaderComponent, dialogConfig);
-
+  openUploaderDialog(fileTypesEnum: FileTypeEnum): void{
+    const dialogRef = this.matDialog.open(UploaderComponent, this.setDialogConfig(fileTypesEnum));
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
+      console.log('The uploader dialog was closed');
     });
+  }
+
+  setDialogConfig( fileTypeEnum: FileTypeEnum ): MatDialogConfig {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      fileType: fileTypeEnum,
+    };
+    return dialogConfig;
   }
 
   openAngularUploaderDialog(){
