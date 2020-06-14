@@ -18,7 +18,7 @@ export class ProposalServiceService {
     if (fileData.fileType === FileTypeEnum.WNIOSEK) {
       const formData = new FormData();
       formData.append('data', new Blob([JSON.stringify(fileData)] ));
-      return this.http.post<Data>(PROPOSAL_PATH, formData);
+      return this.http.post<FileData>(PROPOSAL_PATH, formData);
     }
     // TODO implement another cases
   }
