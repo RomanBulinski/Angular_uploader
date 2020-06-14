@@ -1,34 +1,82 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
+html, body { height: 100%; }
+body { margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; }
 section {
   width: 80%;
   margin: 0 auto;
   padding: 2em;
 }
-
 .blackText{
   color: black;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 //style for angular-uploader component
 .afu-select-btn {
-  padding: 0 20px 0 20px;
+  padding: 10px 20px 10px 20px;
   margin: 6px 8px 6px 8px;
   min-width: 88px;
-  border-radius: 10px;
-  font-size: 25px;
+  font-size: 15px;
   text-align: center;
-  text-transform: uppercase;
-  text-decoration:none;
-  border: none;
+  text-decoration: none;
   outline: yellow;
+  background-color: white;
+  color: black;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
 }
-.afu-reset-btn {}
-.afu-upload-btn {}
+
+.afu-select-btn:hover {
+  background-color: gray; /* Green */
+  color: white;
+}
+
+.afu-reset-btn {
+  padding: 10px 20px 10px 20px;
+  margin: 6px 8px 6px 8px;
+  min-width: 88px;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+  outline: yellow;
+  background-color: white;
+  color: black;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+}
+
+.afu-reset-btn:hover {
+  background-color: gray; /* Green */
+  color: white;
+}
+
+.afu-upload-btn {
+  padding: 10px 20px 10px 20px;
+  margin: 6px 8px 6px 8px;
+  min-width: 88px;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+  outline: yellow;
+  background-color: white;
+  color: black;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+}
+
+.afu-upload-btn:hover {
+  background-color: gray; /* Green */
+  color: white;
+}
+
 .afu-dragndrop-box {}
 .afu-dragndrop-text {}
 .afu-constraints-info {}

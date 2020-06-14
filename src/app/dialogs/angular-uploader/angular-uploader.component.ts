@@ -3,7 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FileData} from '../../interfaces/FileData';
 
 
-
 @Component({
   selector: 'app-angular-uploader',
   templateUrl: './angular-uploader.component.html',
@@ -21,10 +20,10 @@ export class AngularUploaderComponent implements OnInit {
 
   afuConfig = {
     multiple: false,
-    formatsAllowed: '.jpg,.png,.pdf',
+    formatsAllowed: this.fileData.fileFormatsInString,
     maxSize: '1',
     uploadAPI: {
-      url: this.URL_UPLOADER,
+      url: this.fileData.urlUploader,
       method: 'POST',
       headers: {
         'Content-Type': 'text/plain;charset=UTF-8',
@@ -42,29 +41,26 @@ export class AngularUploaderComponent implements OnInit {
     hideSelectBtn: false,
     fileNameIndex: true,
     replaceTexts: {
-      selectFileBtn: 'Select Files',
+      selectFileBtn: 'Znajdż plik',
       resetBtn: 'Reset',
-      uploadBtn: 'Upload',
+      uploadBtn: 'Zapisz',
       dragNDropBox: 'Drag N Drop',
       attachPinBtn: 'Attach Files...',
-      afterUploadMsg_success: 'Successfully Uploaded !',
-      afterUploadMsg_error: 'Upload Failed !',
+      afterUploadMsg_success: 'Plik został załadowany',
+      afterUploadMsg_error: 'Plik nie został załadowany',
       sizeLimit: 'Size Limit'
     }
   };
 
   DocUpload($event: any) {
-    console.log('test');
-    console.log($event);
-    console.log('test-2');
-    console.log(this.resetVar);
+    // console.log($event);
   }
 
   ngOnInit() {
-
   }
 
-  onNoClick(): void {
+
+  close(): void {
     this.dialogRef.close();
   }
 

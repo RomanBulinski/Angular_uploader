@@ -21,7 +21,6 @@ export class UploaderComponent implements OnInit {
   formatFileFC: FormControl;
   foundedDocumentFC: FormControl;
 
-  // formatsFile = Object.values(FileFormatsEnum);
   formatsFile: FileFormatsEnum[];
 
   message: string;
@@ -113,7 +112,7 @@ export class UploaderComponent implements OnInit {
 
   smsCheckAndFileSave(): void {
     this.smsCheck();
-    this.saveToDB();
+    this.sendToDB();
   }
 
   smsCheck(): void {
@@ -134,7 +133,7 @@ export class UploaderComponent implements OnInit {
     });
   }
 
-  saveToDB() {
+  sendToDB() {
     this.proposalService.save(this.fileData);
   }
 

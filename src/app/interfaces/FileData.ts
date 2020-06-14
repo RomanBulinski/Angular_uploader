@@ -7,7 +7,9 @@ export interface FileData {
   name?: string;
   fileType?: FileTypeEnum;
   fileFormats?: FileFormatsEnum[];
+  fileFormatsInString?: string;
   fileOriginalLocalisation?: string;
+  urlUploader: string;
   date?: Date;
   loadedFile?: File;
 

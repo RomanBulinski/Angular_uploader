@@ -5,7 +5,6 @@ import {AngularUploaderComponent} from '../dialogs/angular-uploader/angular-uplo
 import {FileTypeEnum} from '../enum/fileTypesEnum';
 
 
-
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -25,14 +24,14 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
 
-  openUploaderDialog(fileTypesEnum: FileTypeEnum): void{
+  openUploaderDialog(fileTypesEnum: FileTypeEnum): void {
     const dialogRef = this.matDialog.open(UploaderComponent, this.setDialogConfig(fileTypesEnum));
     dialogRef.afterClosed().subscribe(result => {
       console.log('The uploader dialog was closed');
     });
   }
 
-  setDialogConfig( fileTypeEnum: FileTypeEnum ): MatDialogConfig {
+  private setDialogConfig(fileTypeEnum: FileTypeEnum): MatDialogConfig {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       fileType: fileTypeEnum,
@@ -40,12 +39,42 @@ export class MainComponent implements OnInit {
     return dialogConfig;
   }
 
-  openAngularUploaderDialog(){
-    const dialogRef = this.matDialog.open(AngularUploaderComponent);
+  openAngularUploaderDialog(fileTypesEnum: FileTypeEnum): void {
+    const dialogRef = this.matDialog.open(AngularUploaderComponent, this.setDialogConfigForAngularUploader(fileTypesEnum));
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 
+  private setDialogConfigForAngularUploader(fileTypeEnum: FileTypeEnum): MatDialogConfig {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      fileType: fileTypeEnum,
+      fileFormatsInString: this.setFormatsFile(fileTypeEnum),
+      urlUploader: this.setUrlApi(fileTypeEnum),
+    };
+    return dialogConfig;
+  }
+
+  private setFormatsFile(fileTypeEnum: FileTypeEnum): string {
+    if (fileTypeEnum === FileTypeEnum.WNIOSEK) {
+      return '.pdf, .jpeg';
+    }
+    if (fileTypeEnum === FileTypeEnum.PODANIE) {
+      return '.jpg';
+    }
+  }
+
+  private setUrlApi(fileTypeEnum: FileTypeEnum): string {
+    if (fileTypeEnum === FileTypeEnum.WNIOSEK) {
+      return 'https://example-file-upload-api';
+    }
+    if (fileTypeEnum === FileTypeEnum.PODANIE) {
+      return 'https://example-file-upload-api';
+    }
+  }
+
+
+
 }
+
