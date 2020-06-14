@@ -14,6 +14,7 @@ import {AngularFileUploaderModule} from 'angular-file-uploader';
 import {AngularUploaderComponent} from './dialogs/angular-uploader/angular-uploader.component';
 import {ProposalServiceService} from './dialogs/services/proposal-service.service';
 import {SmsConfirmationComponent} from './dialogs/smsConfirmation/smsConfirmation.component';
+// import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -30,18 +31,19 @@ import {SmsConfirmationComponent} from './dialogs/smsConfirmation/smsConfirmatio
     AngularUploaderComponent,
     SmsConfirmationComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatInputModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    AngularFileUploaderModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatInputModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        AngularFileUploaderModule,
+        // FlexLayoutModule
+    ],
   providers: [ProposalServiceService],
   bootstrap: [AppComponent]
 })

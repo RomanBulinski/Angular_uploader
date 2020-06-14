@@ -28,6 +28,7 @@ export class UploaderComponent implements OnInit {
   readonly: boolean;
   isButtonFindFileDisabled: boolean;
   isButtonOkDisabled: boolean;
+  isSMScheckd: boolean;
 
   private fileToUpload: File;
 
@@ -70,6 +71,7 @@ export class UploaderComponent implements OnInit {
     this.readonly = true;
     this.isButtonFindFileDisabled = true;
     this.isButtonOkDisabled = true;
+    this.isSMScheckd = false;
   }
 
   setFormControls() {
@@ -87,8 +89,9 @@ export class UploaderComponent implements OnInit {
     this.fileToUpload = fileList.item(0);
     if (this.checkFormatFile(this.fileToUpload)) {
       this.foundedDocumentFC = new FormControl(this.fileToUpload.name);
-      this.fileData.loadedFile = this.fileToUpload;
+      this.fileData.fileFormats = this.formatFileFC.value;
       this.fileData.name = this.fileToUpload.name;
+      this.fileData.loadedFile = this.fileToUpload;
       this.message = 'Dokument jest gotowy do zapisu';
       this.toggleOkButton();
     } else {
@@ -101,19 +104,17 @@ export class UploaderComponent implements OnInit {
   }
 
   private toggleOkButton() {
-    if(this.isButtonOkDisabled){
+    if (this.isButtonOkDisabled) {
       this.isButtonOkDisabled = false;
-    }else{
+    } else {
       this.isButtonOkDisabled = true;
     }
   }
 
   smsCheckAndFileSave(): void {
     this.smsCheck();
-    this.savetoDB();
+    this.saveToDB();
   }
-
-  isSMScheckd = false;
 
   smsCheck(): void {
     const dialogRef = this.matDialog.open(SmsConfirmationComponent, {
@@ -133,9 +134,11 @@ export class UploaderComponent implements OnInit {
     });
   }
 
-  savetoDB(){
+  saveToDB() {
     this.proposalService.save(this.fileData);
   }
 
-
 }
+
+
+

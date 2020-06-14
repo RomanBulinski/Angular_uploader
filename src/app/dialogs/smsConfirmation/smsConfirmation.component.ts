@@ -22,7 +22,6 @@ export class SmsConfirmationComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('data na wejsciu:' + this.data);
     this.codeFC = new FormControl(this.EMPTY_STRING, [
       Validators.required,
       Validators.pattern(AppUtils.onlyNumbersPattern)]);

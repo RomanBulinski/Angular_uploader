@@ -9,6 +9,6 @@ export interface FileData {
   fileFormats?: FileFormatsEnum[];
   fileOriginalLocalisation?: string;
   date?: Date;
-  loadedFile?: Blob;
+  loadedFile?: File;
 
 }
