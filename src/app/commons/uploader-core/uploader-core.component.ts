@@ -60,7 +60,7 @@ export class UploaderCoreComponent implements OnInit, OnChanges {
   findAndCheckFile(event): void {
     this.handleFileInput(event);
     if (this.checkFormatFile(this.fileToUpload)) {
-      this.foundedDocumentNameFC = new FormControl(this.fileToUpload.name);
+      this.infillNameFC();
       this.prepareFileData();
       this.emitData();
       this.showInscription('');
@@ -69,6 +69,9 @@ export class UploaderCoreComponent implements OnInit, OnChanges {
     }
   }
 
+  infillNameFC(): void{
+   this.foundedDocumentNameFC = new FormControl(this.fileToUpload.name);
+  }
   clearCoreUploader(): void {
     this.showInscription('');
     this.setFormControls();
@@ -110,13 +113,5 @@ export class UploaderCoreComponent implements OnInit, OnChanges {
   showInscription(inscription: string): void {
     this.message = inscription;
   }
-
-  // private toggleOkButton() {
-  //   if (this.isButtonOkDisabled) {
-  //     this.isButtonOkDisabled = false;
-  //   } else {
-  //     this.isButtonOkDisabled = true;
-  //   }
-  // }
 
 }
