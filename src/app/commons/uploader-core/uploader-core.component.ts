@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FileFormatsEnum} from '../../enum/fileFormatsEnum';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {ProposalServiceService} from '../../dialogs/services/proposal-service.service';
@@ -16,6 +16,7 @@ export class UploaderCoreComponent implements OnInit {
 
   nameFC: FormControl;
   foundedDocumentNameFC: FormControl;
+  coreFG: FormGroup;
 
   message: string;
   readonly: boolean;
@@ -26,6 +27,7 @@ export class UploaderCoreComponent implements OnInit {
   @Output() titleChanged = new EventEmitter<FileData>();
 
   constructor(
+    private formBuilder: FormBuilder,
     private proposalService: ProposalServiceService,
     @Inject(MAT_DIALOG_DATA) public fileData: FileData
   ) {
@@ -40,11 +42,22 @@ export class UploaderCoreComponent implements OnInit {
   setFormControls(): void {
     this.nameFC = new FormControl(this.EMPTY_STRING, [Validators.required,]);
     this.foundedDocumentNameFC = new FormControl(this.EMPTY_STRING);
+    this.coreFG = this.formBuilder.group({
+      nameFC: this.nameFC,
+      foundedDocumentNameFC: this.foundedDocumentNameFC,
+    });
   }
 
   setVariabels(): void {
     this.readonly = true;
     this.isButtonFindFileDisabled = false;
+  }
+
+  isNameFCinfill(): boolean {
+    if (this.nameFC.value) {
+      return true;
+    }
+    return false;
   }
 
   findAndCheckFile(event): void {
@@ -54,6 +67,7 @@ export class UploaderCoreComponent implements OnInit {
       this.foundedDocumentNameFC = new FormControl(this.fileToUpload.name);
       this.prepareFileData();
       this.emitData();
+      this.showInscription('');
     } else {
       this.showInscription('Zły fomrat pliku');
     }
@@ -64,7 +78,7 @@ export class UploaderCoreComponent implements OnInit {
     this.setFormControls();
   }
 
-  handleFileInput(event): File {
+  handleFileInput(event): void {
     const fileList: FileList = event.target.files;
     this.fileToUpload = fileList.item(0);
   }
@@ -101,12 +115,12 @@ export class UploaderCoreComponent implements OnInit {
     this.message = inscription;
   }
 
-  private toggleOkButton() {
-    if (this.isButtonOkDisabled) {
-      this.isButtonOkDisabled = false;
-    } else {
-      this.isButtonOkDisabled = true;
-    }
-  }
+  // private toggleOkButton() {
+  //   if (this.isButtonOkDisabled) {
+  //     this.isButtonOkDisabled = false;
+  //   } else {
+  //     this.isButtonOkDisabled = true;
+  //   }
+  // }
 
 }

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {AngularUploaderComponent} from '../dialogs/angular-uploader/angular-uploader.component';
 import {FileTypeEnum} from '../enum/fileTypesEnum';
 import {ObservableExample} from '../example/ObservableExample';
 import {ProperUploaderComponent} from '../dialogs/proper-uploader/proper-uploader.component';
