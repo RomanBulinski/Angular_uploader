@@ -1,5 +1,3 @@
-<h1 mat-dialog-title>{{fileData.dialogTitle}}</h1>
-
 <div fxLayout="column" fxLayoutAlign="space-around center" >
 
   <div>
@@ -13,49 +11,30 @@
     </mat-form-field>
   </div>
 
-  <div>
-    <mat-form-field appearance="outline">
-      <mat-label>Typ pliku</mat-label>
-      <select
-              [formControl]="formatFileFC"
-              matNativeControl
-              name="formatFile">
-        <option selected value=""></option>
-        <option *ngFor="let type of formatsFile" [value]="type" >
-          {{type}}
-        </option>
-      </select>
-    </mat-form-field>
-  </div>
-
   <div fxLayout="row" fxLayoutGap="20px">
     <mat-form-field appearance="outline">
       <mat-label>Poszukiwany plik</mat-label>
       <label>
-        <input [formControl]="foundedDocumentFC"
+        <input [formControl]="foundedDocumentNameFC"
                [readonly]="readonly"
                matInput
                placeholder="Wpisz nazwe pliku">
       </label>
     </mat-form-field>
 
-    <button mat-button [disabled]="isButtonFindFileDisabled">
+    <button mat-button
+            [disabled]="isButtonFindFileDisabled">
       <label for="file-input" class="btn btn-default" flow-btn>
         Znajdz plik
         <input id="file-input"
                type="file"
                style="visibility: hidden; position: absolute;"
-               (change)="handleFileInput($event)"
-               accept="{{fileData.fileFormats}}">
+               (change)="findAndCheckFile($event)"
+               >
       </label>
     </button>
   </div>
   <div>{{message}}</div>
 </div>
 
-<div mat-dialog-actions>
-  <button (click)="close()" mat-button>Wyjdż</button>
-  <button (click)="smsCheckAndFileSave()"
-          mat-button [disabled]="isButtonOkDisabled">
-    Potwierdzenie SMS / Ok</button>
-</div>
+

@@ -14,6 +14,8 @@ import {AngularFileUploaderModule} from 'angular-file-uploader';
 import {AngularUploaderComponent} from './dialogs/angular-uploader/angular-uploader.component';
 import {ProposalServiceService} from './dialogs/services/proposal-service.service';
 import {SmsConfirmationComponent} from './dialogs/smsConfirmation/smsConfirmation.component';
+import {ProperUploaderComponent} from './dialogs/proper-uploader/proper-uploader.component';
+import {UploaderCoreComponent} from './commons/uploader-core/uploader-core.component';
 // import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
@@ -24,12 +26,15 @@ import {SmsConfirmationComponent} from './dialogs/smsConfirmation/smsConfirmatio
     UploaderComponent,
     EmptyComponent,
     AngularUploaderComponent,
-    SmsConfirmationComponent
+    SmsConfirmationComponent,
+    ProperUploaderComponent,
+    UploaderCoreComponent
   ],
   entryComponents: [
     UploaderComponent,
     AngularUploaderComponent,
-    SmsConfirmationComponent
+    SmsConfirmationComponent,
+    ProperUploaderComponent
   ],
     imports: [
         BrowserModule,

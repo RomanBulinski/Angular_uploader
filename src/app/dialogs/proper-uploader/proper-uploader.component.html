@@ -1,0 +1,20 @@
+
+<h1 mat-dialog-title>{{fileData.fileType}}</h1>
+
+<app-uploader-core
+                   [acceptetFormats]="acceptetFormats"
+                    (titleChanged)="getDataFromCore($event)"
+></app-uploader-core>
+
+<!--<div mat-dialog-actions>-->
+<!--  <button (click)="close()" mat-raised-button >Wyjdż</button>-->
+<!--</div>-->
+
+<div>{{message}}</div>
+
+<div mat-dialog-actions>
+  <button (click)="close()" mat-button>Wyjdż</button>
+  <button (click)="smsCheckAndFileSave()"
+          mat-button [disabled]="isButtonOkDisabled">
+    Potwierdzenie SMS / Ok</button>
+</div>
