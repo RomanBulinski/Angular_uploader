@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FileFormatsEnum} from '../../enum/fileFormatsEnum';
 import {MAT_DIALOG_DATA} from '@angular/material';
@@ -10,7 +10,7 @@ import {FileData} from '../../interfaces/FileData';
   templateUrl: './uploader-core.component.html',
   styleUrls: ['./uploader-core.component.scss']
 })
-export class UploaderCoreComponent implements OnInit {
+export class UploaderCoreComponent implements OnInit, OnChanges {
 
   EMPTY_STRING = '';
 
@@ -24,19 +24,23 @@ export class UploaderCoreComponent implements OnInit {
   fileToUpload: File;
 
   @Input() acceptetFormats: FileFormatsEnum[];
+  @Input() isClearForm: boolean;
   @Output() titleChanged = new EventEmitter<FileData>();
 
   constructor(
     private formBuilder: FormBuilder,
     private proposalService: ProposalServiceService,
     @Inject(MAT_DIALOG_DATA) public fileData: FileData
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.setFormControls();
     this.setVariabels();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("zmianaaaaa : "+changes.isClearForm.currentValue);
+    this.clearCoreUploader();
   }
 
   setFormControls(): void {
@@ -53,15 +57,7 @@ export class UploaderCoreComponent implements OnInit {
     this.isButtonFindFileDisabled = false;
   }
 
-  isNameFCinfill(): boolean {
-    if (this.nameFC.value) {
-      return true;
-    }
-    return false;
-  }
-
   findAndCheckFile(event): void {
-    // this.clearCoreUploader();
     this.handleFileInput(event);
     if (this.checkFormatFile(this.fileToUpload)) {
       this.foundedDocumentNameFC = new FormControl(this.fileToUpload.name);

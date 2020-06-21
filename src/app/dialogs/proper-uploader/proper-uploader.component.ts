@@ -16,6 +16,8 @@ export class ProperUploaderComponent implements OnInit {
   isButtonOkDisabled: boolean;
   acceptetFormats: FileFormatsEnum[];
   message: string;
+  // fileData: FileData;
+  isClearForm: boolean;
 
   constructor(
     public matDialog: MatDialog,
@@ -24,18 +26,18 @@ export class ProperUploaderComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public fileData: FileData) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initVariabels();
   }
 
   initVariabels(): void {
     this.acceptetFormats = [FileFormatsEnum.PDF];
     this.message = '';
+    this.isClearForm = false;
   }
 
   smsCheckAndFileSave(): void {
     this.smsCheck();
-    this.sendToDB();
   }
 
   smsCheck(): void {
@@ -45,45 +47,25 @@ export class ProperUploaderComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // this.isSMScheckd = true;
-        // this.message = 'Zapisano plik : ' + this.fileData.name;
-        // this.foundedDocumentFC = new FormControl(this.EMPTY_STRING,);
-        // this.toggleOkButton();
+        this.showMessage('Zapisano plik :' + this.fileData.name);
+        this.sendToDB();
       } else {
-        // this.isSMScheckd = false;
-        // this.message = 'Niezakończono operacji';
+        this.showMessage('Nie zapisano pliku :' + this.fileData.name);
       }
+      this.isClearForm = this.isClearForm != true;
     });
   }
 
-
-  getDataFromCore(fileData: FileData) {
-    this.showMessage('Plik : '+ fileData.name +', jest gotowy do zapisu')
+  getDataFromCore(fileData: FileData): void {
+    this.fileData = fileData;
+    this.showMessage('Plik : '+ fileData.name +', jest gotowy do zapisu');
   }
 
-  showMessage(message: string){
+  private showMessage(message: string): void{
     this.message = message;
   }
 
-  // smsCheck(): void {
-  //   const dialogRef = this.matDialog.open(SmsConfirmationComponent, {
-  //     width: '350px',
-  //     data: true,
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result) {
-  //       this.isSMScheckd = true;
-  //       this.message = 'Zapisano plik : ' + this.fileData.name;
-  //       this.foundedDocumentFC = new FormControl(this.EMPTY_STRING);
-  //       this.toggleOkButton();
-  //     } else {
-  //       this.isSMScheckd = false;
-  //       this.message = 'Niezakończono operacji';
-  //     }
-  //   });
-  // }
-
-  sendToDB() {
+  sendToDB(): void {
     // this.proposalService.save(this.fileData);
   }
 
