@@ -29,6 +29,7 @@ export class UploaderCoreComponent implements OnInit, OnChanges {
 
   constructor(
     private formBuilder: FormBuilder,
+    //TODO implemen proposalService;
     private proposalService: ProposalServiceService,
     @Inject(MAT_DIALOG_DATA) public fileData: FileData
   ) {}
@@ -39,7 +40,7 @@ export class UploaderCoreComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("zmianaaaaa : "+changes.isClearForm.currentValue);
+    // console.log("zmianaaaaa : "+changes.isClearForm.currentValue);
     this.clearCoreUploader();
   }
 
@@ -72,6 +73,7 @@ export class UploaderCoreComponent implements OnInit, OnChanges {
   infillNameFC(): void{
    this.foundedDocumentNameFC = new FormControl(this.fileToUpload.name);
   }
+
   clearCoreUploader(): void {
     this.showInscription('');
     this.setFormControls();

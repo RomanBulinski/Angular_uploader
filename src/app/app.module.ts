@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
-import {MatButtonModule, MatCardModule, MatDialogModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatSortModule, MatTableModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavComponent} from './nav/nav.component';
@@ -14,6 +14,7 @@ import {ProposalServiceService} from './dialogs/services/proposal-service.servic
 import {SmsConfirmationComponent} from './dialogs/smsConfirmation/smsConfirmation.component';
 import {ProperUploaderComponent} from './dialogs/proper-uploader/proper-uploader.component';
 import {UploaderCoreComponent} from './commons/uploader-core/uploader-core.component';
+
 
 // import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -42,6 +43,8 @@ import {UploaderCoreComponent} from './commons/uploader-core/uploader-core.compo
     MatCardModule,
     ReactiveFormsModule,
     AngularFileUploaderModule,
+    MatTableModule,
+    MatSortModule,
     // FlexLayoutModule
   ],
   providers: [ProposalServiceService],
