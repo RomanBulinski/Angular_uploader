@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import {MatCalendarCellCssClasses, MatDialog, MatDialogConfig} from '@angular/material';
 import {FileTypeEnum} from '../enum/fileTypesEnum';
 import {ObservableExample} from '../example/ObservableExample';
 import {ProperUploaderComponent} from '../dialogs/proper-uploader/proper-uploader.component';
+import {SaverComponent} from '../commons/saver/saver.component';
 
 
 @Component({
@@ -17,6 +18,11 @@ export class MainComponent implements OnInit {
   PODANIE = FileTypeEnum.PODANIE;
   DOKUMENT = FileTypeEnum.DOKUMENT;
   INNY = FileTypeEnum.INNY;
+
+  date : Date = null;
+  // date : Date = new Date(2020, 7, 1);
+  minDate = new Date(2020, 7, 1);
+  // maxDate = new Date(2025,2,1);
 
   constructor(public matDialog: MatDialog) {
   }
@@ -40,6 +46,20 @@ export class MainComponent implements OnInit {
     };
     return dialogConfig;
   }
+  openSaver() {
+    const dialogRef = this.matDialog.open(SaverComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  dateClass = (d: Date): MatCalendarCellCssClasses => {
+    const date = d.getDate();
+
+    // Highlight the 1st and 20th day of each month.
+    return (date === 1 || date === 20) ? 'example-custom-date-class' : '';
+  }
+
 
 }
 

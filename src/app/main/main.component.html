@@ -1,14 +1,43 @@
-
 <div fxLayout="row" fxLayoutGap="20px">
 
-<!--  <button (click)="openUploaderDialog(WNIOSEK)" mat-raised-button>{{WNIOSEK}}</button>-->
-<!--  <button (click)="openUploaderDialog(PODANIE)" mat-raised-button>{{PODANIE}}</button>-->
-<!--  <button (click)="openUploaderDialog(DOKUMENT)" mat-raised-button>{{DOKUMENT}}</button>-->
-<!--  <button (click)="openUploaderDialog(INNY)" mat-raised-button>{{INNY}}</button>-->
-<!--  <div>...</div>-->
-<!--  <button (click)="openAngularUploaderDialog(WNIOSEK)" mat-raised-button>{{WNIOSEK}}</button>-->
-  <div>...</div>
-  <button (click)="openProperUploader(WNIOSEK)" mat-raised-button>{{WNIOSEK}}</button>
+  <!--  <button (click)="openUploaderDialog(WNIOSEK)" mat-raised-button>{{WNIOSEK}}</button>-->
+  <!--  <button (click)="openUploaderDialog(PODANIE)" mat-raised-button>{{PODANIE}}</button>-->
+  <!--  <button (click)="openUploaderDialog(DOKUMENT)" mat-raised-button>{{DOKUMENT}}</button>-->
+  <!--  <button (click)="openUploaderDialog(INNY)" mat-raised-button>{{INNY}}</button>-->
+  <!--  <div>...</div>-->
+  <!--  <button (click)="openAngularUploaderDialog(WNIOSEK)" mat-raised-button>{{WNIOSEK}}</button>-->
+
+  <div fxLayout="column">
+
+    <div fxLayout="row">
+      <button (click)="openProperUploader(WNIOSEK)" mat-raised-button>{{WNIOSEK}}</button>
+      <button (click)="openSaver()" mat-raised-button>Saver</button>
+    </div>
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Wybierz date</mat-label>
+
+      <input #resultPickerModel="ngModel"
+             [(ngModel)]="date"
+             [matDatepicker]="resultPicker"
+             [min]="minDate"
+             matInput
+             required>
+      <mat-datepicker-toggle [for]="resultPicker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #resultPicker></mat-datepicker>
+
+      <mat-error *ngIf="resultPickerModel.hasError('matDatepickerParse')">
+        "{{resultPickerModel.getError('matDatepickerParse').text}}"
+        Zły format daty
+      </mat-error>
+      <mat-error *ngIf="resultPickerModel.hasError('matDatepickerMin')">
+        Data nie może być wcześniejsza niż : {{minDate | date }}</mat-error>
+      <mat-error *ngIf="resultPickerModel.hasError('required')">
+        Data nie może być pusta</mat-error>
+
+    </mat-form-field>
+  </div>
 
 </div>
 
